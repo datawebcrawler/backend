@@ -9,6 +9,12 @@ app.use(cors());
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+io.on('connection', socket => {
+  socket.on('connectRoom', box => {
+    socket.join(box);
+  })
+});
+
 mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-d2kv2.mongodb.net/omnistack?retryWrites=true&w=majority', 
   {
     useNewUrlParser: true,
